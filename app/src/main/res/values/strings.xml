@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Keyo</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Zero-Knowledge Password Manager</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_account_password">Account password</string>
+    <string name="hint_master_password">Master password</string>
+    <string name="hint_master_password_confirm">Confirm master password</string>
+    <string name="helper_master_password_local">Verified only on this device, never sent anywhere</string>
+    <string name="action_unlock">Unlock</string>
+    <string name="action_create_vault">Create vault</string>
+    <string name="action_switch_account">Sign in to another account</string>
+
+    <!-- Setup -->
+    <string name="setup_title">New Vault</string>
+    <string name="setup_subtitle">Account is for sync. Master password is for encryption.</string>
+    <string name="helper_account_password">Minimum 8 characters. Do NOT use your master password!</string>
+    <string name="helper_master_password">Minimum 10 characters, rating "Good" or higher</string>
+    <string name="setup_zero_knowledge_note">⚠️ The master password never leaves your device. If you forget it, it will be IMPOSSIBLE to recover your data.</string>
+
+    <!-- Strength -->
+    <string name="strength_very_weak">Strength: very weak</string>
+    <string name="strength_weak">Strength: weak</string>
+    <string name="strength_fair">Strength: fair</string>
+    <string name="strength_good">Strength: good</string>
+    <string name="strength_strong">Strength: strong</string>
+
+    <!-- Main -->
+    <string name="empty_vault">The vault is empty.\nTap + to add your first password.</string>
+    <string name="action_add_entry">Add entry</string>
+    <string name="action_lock">Lock</string>
+    <string name="action_sign_out">Sign out</string>
+    <string name="locked_placeholder">•••••• (locked)</string>
+    <string name="decrypt_error_placeholder">Decryption error</string>
+
+    <!-- Detail -->
+    <string name="title_new_entry">New entry</string>
+    <string name="title_edit_entry">Edit entry</string>
+    <string name="hint_service_name">Service name</string>
+    <string name="hint_username">Login / email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_notes">Notes</string>
+    <string name="action_generate">Generate</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="delete_confirm_title">Delete entry?</string>
+    <string name="delete_confirm_message">This action cannot be undone.</string>
+    <string name="entry_saved">Saved (encrypted)</string>
+    <string name="password_copied">Password copied!</string>
+    <string name="clipboard_warning">⚠️ Clipboard will be cleared in 30 s. Note: Samsung/Xiaomi keyboards may save clipboard history (we suggest clearing it or changing the keyboard)!</string>
+
+    <!-- Firebase -->
+    <string name="firebase_not_configured">⚠️ Firebase is not configured. See README-KEYO.md for setup.</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">Enter a valid email</string>
+    <string name="error_account_password_short">Account password is too short (minimum 8 characters)</string>
+    <string name="error_account_password_empty">Enter account password</string>
+    <string name="error_master_password_weak">Master password is too weak: 10+ characters and "Good" rating required</string>
+    <string name="error_master_password_mismatch">Passwords do not match</string>
+    <string name="error_master_password_empty">Enter master password</string>
+    <string name="error_master_password_wrong">Wrong master password</string>
+    <string name="error_registration_failed">Failed to create account: %1$s</string>
+    <string name="error_sign_in_failed">Failed to sign in: %1$s</string>
+    <string name="error_profile_save">Failed to save profile: %1$s</string>
+    <string name="error_profile_load">Failed to load profile: %1$s</string>
+    <string name="error_crypto">Cryptographic error: %1$s</string>
+    <string name="error_sync">Sync error: %1$s</string>
+    <string name="error_entry_save">Failed to save entry: %1$s</string>
+    <string name="error_entry_delete">Failed to delete entry: %1$s</string>
+    <string name="error_service_empty">Specify service name</string>
+</resources>

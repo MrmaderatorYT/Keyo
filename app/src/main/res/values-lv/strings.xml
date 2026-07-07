@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Keyo</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Zero-Knowledge paroļu pārvaldnieks</string>
+    <string name="hint_email">E-pasts</string>
+    <string name="hint_account_password">Konta parole</string>
+    <string name="hint_master_password">Galvenā parole</string>
+    <string name="hint_master_password_confirm">Apstiprināt galveno paroli</string>
+    <string name="helper_master_password_local">Tiek verificēta tikai šajā ierīcē, nekad nekur netiek sūtīta</string>
+    <string name="action_unlock">Atbloķēt</string>
+    <string name="action_create_vault">Izveidot krātuvi</string>
+    <string name="action_switch_account">Pierakstīties citā kontā</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Jauna krātuve</string>
+    <string name="setup_subtitle">Konts ir paredzēts sinhronizācijai. Galvenā parole ir paredzēta šifrēšanai.</string>
+    <string name="helper_account_password">Vismaz 8 rakstzīmes. NELIETOJIET savu galveno paroli!</string>
+    <string name="helper_master_password">Vismaz 10 rakstzīmes, vērtējums „Laba“ vai augstāks</string>
+    <string name="setup_zero_knowledge_note">⚠️ Galvenā parole nekad nepamet jūsu ierīci. Ja to aizmirsīsiet, datu atgūšana būs NEIESPĒJAMA.</string>
+
+    <!-- Strength -->
+    <string name="strength_very_weak">Drošība: ļoti vāja</string>
+    <string name="strength_weak">Drošība: vāja</string>
+    <string name="strength_fair">Drošība: vidēja</string>
+    <string name="strength_good">Drošība: laba</string>
+    <string name="strength_strong">Drošība: stipra</string>
+
+    <!-- Main -->
+    <string name="empty_vault">Krātuve ir tukša.\nPieskarieties +, lai pievienotu pirmo paroli.</string>
+    <string name="action_add_entry">Pievienot ierakstu</string>
+    <string name="action_lock">Bloķēt</string>
+    <string name="action_sign_out">Izrakstīties</string>
+    <string name="locked_placeholder">•••••• (bloķēts)</string>
+    <string name="decrypt_error_placeholder">Atšifrēšanas kļūda</string>
+
+    <!-- Detail -->
+    <string name="title_new_entry">Jauns ieraksts</string>
+    <string name="title_edit_entry">Rediģēšana</string>
+    <string name="hint_service_name">Pakalpojuma nosaukums</string>
+    <string name="hint_username">Lietotājvārds / e-pasts</string>
+    <string name="hint_password">Parole</string>
+    <string name="hint_notes">Piezīmes</string>
+    <string name="action_generate">Ģenerēt</string>
+    <string name="action_copy">Kopēt</string>
+    <string name="action_save">Saglabāt</string>
+    <string name="delete">Dzēst</string>
+    <string name="delete_confirm_title">Vai dzēst ierakstu?</string>
+    <string name="delete_confirm_message">Šo darbību nevar atcelt.</string>
+    <string name="entry_saved">Saglabāts (šifrēts)</string>
+    <string name="password_copied">Parole nokopēta!</string>
+    <string name="clipboard_warning">⚠️ Starpliktuve tiks notīrīta pēc 30 s. Piezīme: Samsung/Xiaomi tastatūras var saglabāt starpliktuves vēsturi (ieteicams to notīrīt vai nomainīt tastatūru)!</string>
+
+    <!-- Firebase -->
+    <string name="firebase_not_configured">⚠️ Firebase nav konfigurēts. Skatiet README-KEYO.md, lai veiktu iestatīšanu.</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">Ievadiet derīgu e-pastu</string>
+    <string name="error_account_password_short">Konta parole ir pārāk īsa (vismaz 8 rakstzīmes)</string>
+    <string name="error_account_password_empty">Ievadiet konta paroli</string>
+    <string name="error_master_password_weak">Galvenā parole ir pārāk vāja: nepieciešamas 10+ rakstzīmes un vērtējums „Laba“</string>
+    <string name="error_master_password_mismatch">Paroles nesakrīt</string>
+    <string name="error_master_password_empty">Ievadiet galveno paroli</string>
+    <string name="error_master_password_wrong">Nepareiza galvenā parole</string>
+    <string name="error_registration_failed">Neizdevās izveidot kontu: %1$s</string>
+    <string name="error_sign_in_failed">Neizdevās pierakstīties: %1$s</string>
+    <string name="error_profile_save">Neizdevās saglabāt profilu: %1$s</string>
+    <string name="error_profile_load">Neizdevās ielādēt profilu: %1$s</string>
+    <string name="error_crypto">Kriptogrāfijas kļūda: %1$s</string>
+    <string name="error_sync">Sinhronizācijas kļūda: %1$s</string>
+    <string name="error_entry_save">Neizdevās saglabāt ierakstu: %1$s</string>
+    <string name="error_entry_delete">Neizdevās dzēst ierakstu: %1$s</string>
+    <string name="error_service_empty">Norādiet pakalpojuma nosaukumu</string>
+</resources>

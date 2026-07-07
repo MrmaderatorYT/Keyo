@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Keyo</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Zero-Knowledge paroolihaldur</string>
+    <string name="hint_email">E-post</string>
+    <string name="hint_account_password">Konto parool</string>
+    <string name="hint_master_password">Meisterparool</string>
+    <string name="hint_master_password_confirm">Kinnita meisterparool</string>
+    <string name="helper_master_password_local">Kontrollitakse ainult selles seadmes, ei edastata kunagi kuhugi</string>
+    <string name="action_unlock">Ava lukust</string>
+    <string name="action_create_vault">Loo hoidla</string>
+    <string name="action_switch_account">Logi sisse teisele kontole</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Uus hoidla</string>
+    <string name="setup_subtitle">Konto on sünkroonimiseks. Meisterparool on krüpteerimiseks.</string>
+    <string name="helper_account_password">Vähemalt 8 märki. ÄRA kasuta oma meisterparooli!</string>
+    <string name="helper_master_password">Vähemalt 10 märki, hinnang „Hea“ või kõrgem</string>
+    <string name="setup_zero_knowledge_note">⚠️ Meisterparool ei lahku kunagi sinu seadmest. Kui selle unustad, on andmete taastamine VÕIMATU.</string>
+
+    <!-- Strength -->
+    <string name="strength_very_weak">Tugevus: väga nõrk</string>
+    <string name="strength_weak">Tugevus: nõrk</string>
+    <string name="strength_fair">Tugevus: rahuldav</string>
+    <string name="strength_good">Tugevus: hea</string>
+    <string name="strength_strong">Tugevus: tugev</string>
+
+    <!-- Main -->
+    <string name="empty_vault">Hoidla on tühi.\nEsimene parooli lisamiseks puuduta nuppu +.</string>
+    <string name="action_add_entry">Lisa kirje</string>
+    <string name="action_lock">Lukusta</string>
+    <string name="action_sign_out">Logi välja</string>
+    <string name="locked_placeholder">•••••• (lukustatud)</string>
+    <string name="decrypt_error_placeholder">Krüpteeringu avamise viga</string>
+
+    <!-- Detail -->
+    <string name="title_new_entry">Uus kirje</string>
+    <string name="title_edit_entry">Muutmine</string>
+    <string name="hint_service_name">Teenuse nimi</string>
+    <string name="hint_username">Kasutajatunnus / e-post</string>
+    <string name="hint_password">Parool</string>
+    <string name="hint_notes">Märkmed</string>
+    <string name="action_generate">Genereeri</string>
+    <string name="action_copy">Kopeeri</string>
+    <string name="action_save">Salvesta</string>
+    <string name="delete">Kustuta</string>
+    <string name="delete_confirm_title">Kas kustutada kirje?</string>
+    <string name="delete_confirm_message">Seda toimingut ei saa tagasi võtta.</string>
+    <string name="entry_saved">Salvestatud (krüpteeritud)</string>
+    <string name="password_copied">Parool kopeeritud!</string>
+    <string name="clipboard_warning">⚠️ Lõikelaud tühjendatakse 30 sekundi jooksul. Märkus: Samsungi/Xiaomi klaviatuurid võivad lõikelaua ajalugu salvestada (soovitame selle tühjendada või klaviatuuri vahetada)!</string>
+
+    <!-- Firebase -->
+    <string name="firebase_not_configured">⚠️ Firebase on konfigureerimata. Seadistamiseks vaata README-KEYO.md.</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">Sisesta korrektne e-post</string>
+    <string name="error_account_password_short">Konto parool on liiga lühike (vähemalt 8 märki)</string>
+    <string name="error_account_password_empty">Sisesta konto parool</string>
+    <string name="error_master_password_weak">Meisterparool on liiga nõrk: nõutav vähemalt 10 märki ja hinnang „Hea“</string>
+    <string name="error_master_password_mismatch">Paroolid ei kattu</string>
+    <string name="error_master_password_empty">Sisesta meisterparool</string>
+    <string name="error_master_password_wrong">Vale meisterparool</string>
+    <string name="error_registration_failed">Konto loomine ebaõnnestus: %1$s</string>
+    <string name="error_sign_in_failed">Sisselogimine ebaõnnestus: %1$s</string>
+    <string name="error_profile_save">Profiili salvestamine ebaõnnestus: %1$s</string>
+    <string name="error_profile_load">Profiili laadimine ebaõnnestus: %1$s</string>
+    <string name="error_crypto">Krüptograafiline viga: %1$s</string>
+    <string name="error_sync">Sünkroonimise viga: %1$s</string>
+    <string name="error_entry_save">Kirje salvestamine ebaõnnestus: %1$s</string>
+    <string name="error_entry_delete">Kirje kustutamine ebaõnnestus: %1$s</string>
+    <string name="error_service_empty">Määra teenuse nimi</string>
+</resources>

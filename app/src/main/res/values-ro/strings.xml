@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Keyo</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Manager de parole Zero-Knowledge</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_account_password">Parolă cont</string>
+    <string name="hint_master_password">Parolă master</string>
+    <string name="hint_master_password_confirm">Confirmare parolă master</string>
+    <string name="helper_master_password_local">Verificată doar pe acest dispozitiv, niciodată trimisă nicăieri</string>
+    <string name="action_unlock">Deblocare</string>
+    <string name="action_create_vault">Creare seif</string>
+    <string name="action_switch_account">Conectare la alt cont</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Seif nou</string>
+    <string name="setup_subtitle">Contul este pentru sincronizare. Parola master este pentru criptare.</string>
+    <string name="helper_account_password">Minimum 8 caractere. NU folosiți parola master!</string>
+    <string name="helper_master_password">Minimum 10 caractere, rating „Bună” sau mai mare</string>
+    <string name="setup_zero_knowledge_note">⚠️ Parola master nu părăsește niciodată dispozitivul. Dacă o uitați, va fi IMPOSIBIL să vă recuperați datele.</string>
+
+    <!-- Strength -->
+    <string name="strength_very_weak">Siguranță: foarte slabă</string>
+    <string name="strength_weak">Siguranță: slabă</string>
+    <string name="strength_fair">Siguranță: medie</string>
+    <string name="strength_good">Siguranță: bună</string>
+    <string name="strength_strong">Siguranță: puternică</string>
+
+    <!-- Main -->
+    <string name="empty_vault">Seiful este gol.\nApasă + pentru a adăuga prima parolă.</string>
+    <string name="action_add_entry">Adăugare înregistrare</string>
+    <string name="action_lock">Blocare</string>
+    <string name="action_sign_out">Deconectare</string>
+    <string name="locked_placeholder">•••••• (blocat)</string>
+    <string name="decrypt_error_placeholder">Eroare de decriptare</string>
+
+    <!-- Detail -->
+    <string name="title_new_entry">Înregistrare nouă</string>
+    <string name="title_edit_entry">Editare</string>
+    <string name="hint_service_name">Nume serviciu</string>
+    <string name="hint_username">Utilizator / e-mail</string>
+    <string name="hint_password">Parolă</string>
+    <string name="hint_notes">Note</string>
+    <string name="action_generate">Generare</string>
+    <string name="action_copy">Copiere</string>
+    <string name="action_save">Salvare</string>
+    <string name="delete">Ștergere</string>
+    <string name="delete_confirm_title">Ștergeți înregistrarea?</string>
+    <string name="delete_confirm_message">Această acțiune nu poate fi anulată.</string>
+    <string name="entry_saved">Salvat (criptat)</string>
+    <string name="password_copied">Parolă copiată!</string>
+    <string name="clipboard_warning">⚠️ Clipboard-ul va fi golit în 30 s. Notă: Tastaturile Samsung/Xiaomi pot salva istoricul clipboard-ului (vă recomandăm să îl goliți sau să schimbați tastatura)!</string>
+
+    <!-- Firebase -->
+    <string name="firebase_not_configured">⚠️ Firebase nu este configurat. Consultați README-KEYO.md pentru configurare.</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">Introduceți un e-mail valid</string>
+    <string name="error_account_password_short">Parola contului este prea scurtă (minimum 8 caractere)</string>
+    <string name="error_account_password_empty">Introduceți parola contului</string>
+    <string name="error_master_password_weak">Parola master este prea slabă: sunt necesare peste 10 caractere și rating „Bună”</string>
+    <string name="error_master_password_mismatch">Parolele nu se potrivesc</string>
+    <string name="error_master_password_empty">Introduceți parola master</string>
+    <string name="error_master_password_wrong">Parolă master incorectă</string>
+    <string name="error_registration_failed">Crearea contului a eșuat: %1$s</string>
+    <string name="error_sign_in_failed">Conectarea a eșuat: %1$s</string>
+    <string name="error_profile_save">Salvarea profilului a eșuat: %1$s</string>
+    <string name="error_profile_load">Încărcarea profilului a eșuat: %1$s</string>
+    <string name="error_crypto">Eroare criptografică: %1$s</string>
+    <string name="error_sync">Eroare de sincronizare: %1$s</string>
+    <string name="error_entry_save">Salvarea înregistrării a eșuat: %1$s</string>
+    <string name="error_entry_delete">Ștergerea înregistrării a eșuat: %1$s</string>
+    <string name="error_service_empty">Specificați numele serviciului</string>
+</resources>

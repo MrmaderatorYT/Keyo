@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Keyo</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Gerenciador de senhas Zero-Knowledge</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_account_password">Senha da conta</string>
+    <string name="hint_master_password">Senha mestre</string>
+    <string name="hint_master_password_confirm">Confirmar senha mestre</string>
+    <string name="helper_master_password_local">Verificada apenas neste dispositivo, nunca enviada para lugar nenhum</string>
+    <string name="action_unlock">Desbloquear</string>
+    <string name="action_create_vault">Criar cofre</string>
+    <string name="action_switch_account">Entrar em outra conta</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Novo cofre</string>
+    <string name="setup_subtitle">A conta é para sincronização. A senha mestre é para criptografia.</string>
+    <string name="helper_account_password">Mínimo de 8 caracteres. NÃO use sua senha mestre!</string>
+    <string name="helper_master_password">Mínimo de 10 caracteres, classificação "Boa" ou superior</string>
+    <string name="setup_zero_knowledge_note">⚠️ A senha mestre nunca sai do seu dispositivo. Se a esquecer, será IMPOSSÍVEL recuperar seus dados.</string>
+
+    <!-- Strength -->
+    <string name="strength_very_weak">Força: muito fraca</string>
+    <string name="strength_weak">Força: fraca</string>
+    <string name="strength_fair">Força: razoável</string>
+    <string name="strength_good">Força: boa</string>
+    <string name="strength_strong">Força: forte</string>
+
+    <!-- Main -->
+    <string name="empty_vault">O cofre está vazio.\nToque em + para adicionar a sua primeira senha.</string>
+    <string name="action_add_entry">Adicionar entrada</string>
+    <string name="action_lock">Bloquear</string>
+    <string name="action_sign_out">Sair</string>
+    <string name="locked_placeholder">•••••• (bloqueado)</string>
+    <string name="decrypt_error_placeholder">Erro de descriptografia</string>
+
+    <!-- Detail -->
+    <string name="title_new_entry">Nova entrada</string>
+    <string name="title_edit_entry">Editar entrada</string>
+    <string name="hint_service_name">Nome do serviço</string>
+    <string name="hint_username">Usuário / email</string>
+    <string name="hint_password">Senha</string>
+    <string name="hint_notes">Notas</string>
+    <string name="action_generate">Gerar</string>
+    <string name="action_copy">Copiar</string>
+    <string name="action_save">Salvar</string>
+    <string name="delete">Excluir</string>
+    <string name="delete_confirm_title">Excluir entrada?</string>
+    <string name="delete_confirm_message">Esta ação não pode ser desfeita.</string>
+    <string name="entry_saved">Salvo (criptografado)</string>
+    <string name="password_copied">Senha copiada!</string>
+    <string name="clipboard_warning">⚠️ A área de transferência será limpa em 30 s. Nota: Teclados Samsung/Xiaomi podem salvar o histórico da área de transferência (sugerimos limpá-lo ou alterar o teclado)!</string>
+
+    <!-- Firebase -->
+    <string name="firebase_not_configured">⚠️ O Firebase não está configurado. Consulte README-KEYO.md para obter a configuração.</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">Digite um email válido</string>
+    <string name="error_account_password_short">A senha da conta é muito curta (mínimo 8 caracteres)</string>
+    <string name="error_account_password_empty">Digite a senha da conta</string>
+    <string name="error_master_password_weak">A senha mestre é muito fraca: necessário 10+ caracteres e classificação "Boa"</string>
+    <string name="error_master_password_mismatch">As senhas não coincidem</string>
+    <string name="error_master_password_empty">Digite a senha mestre</string>
+    <string name="error_master_password_wrong">Senha mestre incorreta</string>
+    <string name="error_registration_failed">Falha ao criar conta: %1$s</string>
+    <string name="error_sign_in_failed">Falha ao entrar: %1$s</string>
+    <string name="error_profile_save">Falha ao salvar perfil: %1$s</string>
+    <string name="error_profile_load">Falha ao carregar perfil: %1$s</string>
+    <string name="error_crypto">Erro criptográfico: %1$s</string>
+    <string name="error_sync">Erro de sincronização: %1$s</string>
+    <string name="error_entry_save">Falha ao salvar entrada: %1$s</string>
+    <string name="error_entry_delete">Falha ao excluir entrada: %1$s</string>
+    <string name="error_service_empty">Especifique o nome do serviço</string>
+</resources>

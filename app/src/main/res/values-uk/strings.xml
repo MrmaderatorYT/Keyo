@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Keyo</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Менеджер паролів із нульовим знанням</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_account_password">Пароль акаунта</string>
+    <string name="hint_master_password">Майстер-пароль</string>
+    <string name="hint_master_password_confirm">Повторіть майстер-пароль</string>
+    <string name="helper_master_password_local">Перевіряється лише на цьому пристрої, нікуди не передається</string>
+    <string name="action_unlock">Розблокувати</string>
+    <string name="action_create_vault">Створити сховище</string>
+    <string name="action_switch_account">Увійти в інший акаунт</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Нове сховище</string>
+    <string name="setup_subtitle">Акаунт — для синхронізації. Майстер-пароль — для шифрування.</string>
+    <string name="helper_account_password">Мінімум 8 символів. НЕ використовуйте майстер-пароль!</string>
+    <string name="helper_master_password">Мінімум 10 символів, оцінка «Добрий» або вища</string>
+    <string name="setup_zero_knowledge_note">⚠️ Майстер-пароль ніколи не залишає ваш пристрій. Якщо ви його забудете — відновити дані буде НЕМОЖЛИВО.</string>
+
+    <!-- Strength -->
+    <string name="strength_very_weak">Надійність: дуже слабкий</string>
+    <string name="strength_weak">Надійність: слабкий</string>
+    <string name="strength_fair">Надійність: посередній</string>
+    <string name="strength_good">Надійність: добрий</string>
+    <string name="strength_strong">Надійність: сильний</string>
+
+    <!-- Main -->
+    <string name="empty_vault">Сховище порожнє.\nНатисніть +, щоб додати перший пароль.</string>
+    <string name="action_add_entry">Додати запис</string>
+    <string name="action_lock">Заблокувати</string>
+    <string name="action_sign_out">Вийти з акаунта</string>
+    <string name="locked_placeholder">•••••• (заблоковано)</string>
+    <string name="decrypt_error_placeholder">Помилка розшифрування</string>
+
+    <!-- Detail -->
+    <string name="title_new_entry">Новий запис</string>
+    <string name="title_edit_entry">Редагування</string>
+    <string name="hint_service_name">Назва сервісу</string>
+    <string name="hint_username">Логін / email</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_notes">Нотатки</string>
+    <string name="action_generate">Згенерувати</string>
+    <string name="action_copy">Копіювати</string>
+    <string name="action_save">Зберегти</string>
+    <string name="delete">Видалити</string>
+    <string name="delete_confirm_title">Видалити запис?</string>
+    <string name="delete_confirm_message">Цю дію неможливо скасувати.</string>
+    <string name="entry_saved">Збережено (зашифровано)</string>
+    <string name="password_copied">Пароль скопійовано!</string>
+    <string name="clipboard_warning">⚠️ Буфер очиститься через 30 с. Увага: клавіатури Samsung/Xiaomi можуть зберігати історію буфера (радимо очищати її або змінити клавіатуру)!</string>
+
+    <!-- Firebase -->
+    <string name="firebase_not_configured">⚠️ Firebase не налаштований. Див. README-KEYO.md для налаштування.</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">Введіть коректний email</string>
+    <string name="error_account_password_short">Пароль акаунта закороткий (мінімум 8 символів)</string>
+    <string name="error_account_password_empty">Введіть пароль акаунта</string>
+    <string name="error_master_password_weak">Майстер-пароль заслабкий: потрібно 10+ символів та оцінка «Добрий»</string>
+    <string name="error_master_password_mismatch">Паролі не збігаються</string>
+    <string name="error_master_password_empty">Введіть майстер-пароль</string>
+    <string name="error_master_password_wrong">Неправильний майстер-пароль</string>
+    <string name="error_registration_failed">Не вдалося створити акаунт: %1$s</string>
+    <string name="error_sign_in_failed">Не вдалося увійти: %1$s</string>
+    <string name="error_profile_save">Не вдалося зберегти профіль: %1$s</string>
+    <string name="error_profile_load">Не вдалося завантажити профіль: %1$s</string>
+    <string name="error_crypto">Криптографічна помилка: %1$s</string>
+    <string name="error_sync">Помилка синхронізації: %1$s</string>
+    <string name="error_entry_save">Не вдалося зберегти запис: %1$s</string>
+    <string name="error_entry_delete">Не вдалося видалити запис: %1$s</string>
+    <string name="error_service_empty">Вкажіть назву сервісу</string>
+</resources>

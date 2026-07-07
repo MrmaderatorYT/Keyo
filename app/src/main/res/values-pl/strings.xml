@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Keyo</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Menedżer haseł Zero-Knowledge</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_account_password">Hasło konta</string>
+    <string name="hint_master_password">Hasło główne</string>
+    <string name="hint_master_password_confirm">Powtórz hasło główne</string>
+    <string name="helper_master_password_local">Weryfikowane tylko na tym urządzeniu, nigdy nigdzie niewysyłane</string>
+    <string name="action_unlock">Odblokuj</string>
+    <string name="action_create_vault">Utwórz skarbiec</string>
+    <string name="action_switch_account">Zaloguj się na inne konto</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Nowy skarbiec</string>
+    <string name="setup_subtitle">Konto służy do synchronizacji. Hasło główne służy do szyfrowania.</string>
+    <string name="helper_account_password">Minimum 8 znaków. NIE używaj hasła głównego!</string>
+    <string name="helper_master_password">Minimum 10 znaków, ocena „Dobra” lub wyższa</string>
+    <string name="setup_zero_knowledge_note">⚠️ Hasło główne nigdy nie opuszcza Twojego urządzenia. Jeśli je zapomnisz – odzyskanie danych będzie NIEMOŻLIWE.</string>
+
+    <!-- Strength -->
+    <string name="strength_very_weak">Bezpieczeństwo: bardzo słabe</string>
+    <string name="strength_weak">Bezpieczeństwo: słabe</string>
+    <string name="strength_fair">Bezpieczeństwo: umiarkowane</string>
+    <string name="strength_good">Bezpieczeństwo: dobre</string>
+    <string name="strength_strong">Bezpieczeństwo: silne</string>
+
+    <!-- Main -->
+    <string name="empty_vault">Skarbiec jest pusty.\nNaciśnij +, aby dodać pierwsze hasło.</string>
+    <string name="action_add_entry">Dodaj wpis</string>
+    <string name="action_lock">Zablokuj</string>
+    <string name="action_sign_out">Wyloguj się</string>
+    <string name="locked_placeholder">•••••• (zablokowane)</string>
+    <string name="decrypt_error_placeholder">Błąd odszyfrowywania</string>
+
+    <!-- Detail -->
+    <string name="title_new_entry">Nowy wpis</string>
+    <string name="title_edit_entry">Edycja</string>
+    <string name="hint_service_name">Nazwa usługi</string>
+    <string name="hint_username">Login / email</string>
+    <string name="hint_password">Hasło</string>
+    <string name="hint_notes">Notatki</string>
+    <string name="action_generate">Wygeneruj</string>
+    <string name="action_copy">Kopiuj</string>
+    <string name="action_save">Zapisz</string>
+    <string name="delete">Usuń</string>
+    <string name="delete_confirm_title">Usunąć wpis?</string>
+    <string name="delete_confirm_message">Tej operacji nie można cofnąć.</string>
+    <string name="entry_saved">Zapisano (zaszyfrowane)</string>
+    <string name="password_copied">Hasło skopiowane!</string>
+    <string name="clipboard_warning">⚠️ Schowek zostanie wyczyszczony za 30 s. Uwaga: klawiatury Samsung/Xiaomi mogą zapisywać historię schowka (zalecamy jej czyszczenie lub zmianę klawiatury)!</string>
+
+    <!-- Firebase -->
+    <string name="firebase_not_configured">⚠️ Firebase nie jest skonfigurowany. Zobacz README-KEYO.md w celu konfiguracji.</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">Wprowadź poprawny email</string>
+    <string name="error_account_password_short">Hasło konta jest za krótkie (minimum 8 znaków)</string>
+    <string name="error_account_password_empty">Wprowadź hasło konta</string>
+    <string name="error_master_password_weak">Hasło główne jest za słabe: wymagane jest 10+ znaków oraz ocena „Dobra”</string>
+    <string name="error_master_password_mismatch">Hasła nie pasują do siebie</string>
+    <string name="error_master_password_empty">Wprowadź hasło główne</string>
+    <string name="error_master_password_wrong">Błędne hasło główne</string>
+    <string name="error_registration_failed">Nie udało się utworzyć konta: %1$s</string>
+    <string name="error_sign_in_failed">Nie udało się zalogować: %1$s</string>
+    <string name="error_profile_save">Nie udało się zapisać profilu: %1$s</string>
+    <string name="error_profile_load">Nie udało się załadować profilu: %1$s</string>
+    <string name="error_crypto">Błąd kryptograficzny: %1$s</string>
+    <string name="error_sync">Błąd synchronizacji: %1$s</string>
+    <string name="error_entry_save">Nie udało się zapisać wpisu: %1$s</string>
+    <string name="error_entry_delete">Nie udało się usunąć wpisu: %1$s</string>
+    <string name="error_service_empty">Podaj nazwę usługi</string>
+</resources>

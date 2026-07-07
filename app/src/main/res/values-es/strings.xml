@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Keyo</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Gestor de contraseñas Zero-Knowledge</string>
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_account_password">Contraseña de la cuenta</string>
+    <string name="hint_master_password">Contraseña maestra</string>
+    <string name="hint_master_password_confirm">Confirmar contraseña maestra</string>
+    <string name="helper_master_password_local">Se verifica solo en este dispositivo, nunca se envía a ningún sitio</string>
+    <string name="action_unlock">Desbloquear</string>
+    <string name="action_create_vault">Crear caja fuerte</string>
+    <string name="action_switch_account">Iniciar sesión con otra cuenta</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Nueva caja fuerte</string>
+    <string name="setup_subtitle">La cuenta es para sincronización. La contraseña maestra es para encriptación.</string>
+    <string name="helper_account_password">Mínimo 8 caracteres. ¡NO uses tu contraseña maestra!</string>
+    <string name="helper_master_password">Mínimo 10 caracteres, valoración "Buena" o superior</string>
+    <string name="setup_zero_knowledge_note">⚠️ La contraseña maestra nunca sale de tu dispositivo. Si la olvidas, será IMPOSIBLE recuperar tus datos.</string>
+
+    <!-- Strength -->
+    <string name="strength_very_weak">Seguridad: muy débil</string>
+    <string name="strength_weak">Seguridad: débil</string>
+    <string name="strength_fair">Seguridad: aceptable</string>
+    <string name="strength_good">Seguridad: buena</string>
+    <string name="strength_strong">Seguridad: fuerte</string>
+
+    <!-- Main -->
+    <string name="empty_vault">La caja fuerte está vacía.\nPulsa + para añadir tu primera contraseña.</string>
+    <string name="action_add_entry">Añadir entrada</string>
+    <string name="action_lock">Bloquear</string>
+    <string name="action_sign_out">Cerrar sesión</string>
+    <string name="locked_placeholder">•••••• (bloqueado)</string>
+    <string name="decrypt_error_placeholder">Error de desencriptación</string>
+
+    <!-- Detail -->
+    <string name="title_new_entry">Nueva entrada</string>
+    <string name="title_edit_entry">Editar entrada</string>
+    <string name="hint_service_name">Nombre del servicio</string>
+    <string name="hint_username">Usuario / email</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_notes">Notas</string>
+    <string name="action_generate">Generar</string>
+    <string name="action_copy">Copiar</string>
+    <string name="action_save">Guardar</string>
+    <string name="delete">Eliminar</string>
+    <string name="delete_confirm_title">¿Eliminar entrada?</string>
+    <string name="delete_confirm_message">Esta acción no se puede deshacer.</string>
+    <string name="entry_saved">Guardado (encriptado)</string>
+    <string name="password_copied">¡Contraseña copiada!</string>
+    <string name="clipboard_warning">⚠️ El portapapeles se borrará en 30 s. Nota: ¡Los teclados Samsung/Xiaomi pueden guardar el historial del portapapeles (se recomienda borrarlo o cambiar de teclado)!</string>
+
+    <!-- Firebase -->
+    <string name="firebase_not_configured">⚠️ Firebase no está configurado. Consulta README-KEYO.md para la configuración.</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">Introduce un correo electrónico válido</string>
+    <string name="error_account_password_short">La contraseña de la cuenta es demasiado corta (mínimo 8 caracteres)</string>
+    <string name="error_account_password_empty">Introduce la contraseña de la cuenta</string>
+    <string name="error_master_password_weak">La contraseña maestra es demasiado débil: se requieren más de 10 caracteres y valoración "Buena"</string>
+    <string name="error_master_password_mismatch">Las contraseñas no coinciden</string>
+    <string name="error_master_password_empty">Introduce la contraseña maestra</string>
+    <string name="error_master_password_wrong">Contraseña maestra incorrecta</string>
+    <string name="error_registration_failed">Error al crear la cuenta: %1$s</string>
+    <string name="error_sign_in_failed">Error al iniciar sesión: %1$s</string>
+    <string name="error_profile_save">Error al guardar el perfil: %1$s</string>
+    <string name="error_profile_load">Error al cargar el perfil: %1$s</string>
+    <string name="error_crypto">Error criptográfico: %1$s</string>
+    <string name="error_sync">Error de sincronización: %1$s</string>
+    <string name="error_entry_save">Error al guardar la entrada: %1$s</string>
+    <string name="error_entry_delete">Error al eliminar la entrada: %1$s</string>
+    <string name="error_service_empty">Especifica el nombre del servicio</string>
+</resources>
