@@ -2,4 +2,27 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Light theme -->
+    <color name="keyo_primary">#FF1565C0</color>
+    <color name="keyo_primary_container">#FFD1E4FF</color>
+    <color name="keyo_on_primary_container">#FF001D36</color>
+    <color name="keyo_secondary">#FF546E7A</color>
+    <color name="keyo_secondary_container">#FFD7E3EA</color>
+    <color name="keyo_on_secondary_container">#FF101C22</color>
+    <color name="keyo_background_light">#FFFFFFFF</color>
+    <color name="keyo_surface_light">#FFFFFFFF</color>
+    <color name="keyo_on_surface_light">#FF1A1C1E</color>
+
+    <!-- Dark theme -->
+    <color name="keyo_primary_dark">#FFA0CAFD</color>
+    <color name="keyo_on_primary_dark">#FF003258</color>
+    <color name="keyo_primary_container_dark">#FF00497D</color>
+    <color name="keyo_on_primary_container_dark">#FFD1E4FF</color>
+    <color name="keyo_secondary_dark">#FFB1C8D4</color>
+    <color name="keyo_secondary_container_dark">#FF3A4850</color>
+    <color name="keyo_on_secondary_container_dark">#FFCDE5F1</color>
+    <color name="keyo_background_dark">#FF1A1C1E</color>
+    <color name="keyo_surface_dark">#FF1A1C1E</color>
+    <color name="keyo_on_surface_dark">#FFE2E2E5</color>
 </resources>

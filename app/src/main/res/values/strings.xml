@@ -19,6 +19,9 @@
     <string name="helper_master_password">Minimum 10 characters, rating "Good" or higher</string>
     <string name="setup_zero_knowledge_note">⚠️ The master password never leaves your device. If you forget it, it will be IMPOSSIBLE to recover your data.</string>
 
+    <!-- Data consent (1.1) -->
+    <string name="data_consent_notice">By using this app you automatically agree to the transfer of encrypted data (ciphertexts only). The master password never leaves your device.</string>
+
     <!-- Strength -->
     <string name="strength_very_weak">Strength: very weak</string>
     <string name="strength_weak">Strength: weak</string>
@@ -31,8 +34,13 @@
     <string name="action_add_entry">Add entry</string>
     <string name="action_lock">Lock</string>
     <string name="action_sign_out">Sign out</string>
+    <string name="action_settings">Settings</string>
     <string name="locked_placeholder">•••••• (locked)</string>
     <string name="decrypt_error_placeholder">Decryption error</string>
+    <string name="action_sync_cloud">Sync with cloud</string>
+    <string name="action_already_synced">Already synced with cloud</string>
+    <string name="action_open_entry">Open / edit</string>
+    <string name="entry_synced">Synced with cloud</string>
 
     <!-- Detail -->
     <string name="title_new_entry">New entry</string>
@@ -48,11 +56,42 @@
     <string name="delete_confirm_title">Delete entry?</string>
     <string name="delete_confirm_message">This action cannot be undone.</string>
     <string name="entry_saved">Saved (encrypted)</string>
+    <string name="entry_saved_local">Saved locally (encrypted)</string>
+    <string name="entry_saved_cloud">Saved locally and to cloud (encrypted)</string>
     <string name="password_copied">Password copied!</string>
     <string name="clipboard_warning">⚠️ Clipboard will be cleared in 30 s. Note: Samsung/Xiaomi keyboards may save clipboard history (we suggest clearing it or changing the keyboard)!</string>
+    <string name="switch_save_to_firestore">Send to Firestore (cloud)</string>
+    <string name="helper_save_local_default">By default the password is stored only in a secure local vault on this device. Turn on the switch to also upload the encrypted copy to the cloud.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme_section">Theme</string>
+    <string name="settings_theme_hint">Default follows the system theme. You can force light (white) or dark.</string>
+    <string name="theme_system">System theme (default)</string>
+    <string name="theme_light">Light (white)</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_sync_section">Cloud synchronization</string>
+    <string name="settings_sync_hint">Upload all local encrypted passwords to Firestore. Ciphertexts only — the master password never leaves the device.</string>
+    <string name="action_sync_all_cloud">Sync all passwords to cloud</string>
+    <string name="sync_all_confirm_title">Sync all to cloud?</string>
+    <string name="sync_all_confirm_message">All local encrypted entries will be uploaded to Firestore.</string>
+    <string name="sync_all_success">All passwords synced to cloud</string>
+    <string name="sync_all_empty">Nothing to sync — vault is empty</string>
+    <string name="sync_all_partial">Synced with %1$d errors</string>
+    <string name="settings_danger_section">Danger zone</string>
+    <string name="action_delete_cloud_data">Delete all data from server</string>
+    <string name="settings_delete_cloud_hint">Removes cloud copies. Local passwords on this device stay intact. Account remains.</string>
+    <string name="delete_cloud_confirm_title">Delete cloud data?</string>
+    <string name="delete_cloud_confirm_message">All password entries will be removed from Firestore. Your account and local data will remain.</string>
+    <string name="delete_cloud_success">Cloud data deleted</string>
+    <string name="action_delete_account">Delete account</string>
+    <string name="settings_delete_account_hint">Permanently deletes your account, all cloud data, and local vault data on this device.</string>
+    <string name="delete_account_confirm_title">Delete account?</string>
+    <string name="delete_account_confirm_message">This permanently deletes your account, all cloud data, and local passwords on this device. This cannot be undone.</string>
+    <string name="delete_account_success">Account deleted</string>
 
     <!-- Firebase -->
-    <string name="firebase_not_configured">⚠️ Firebase is not configured. See README-KEYO.md for setup.</string>
+    <string name="firebase_not_configured">⚠️ Firebase is not configured. See README.md for setup.</string>
 
     <!-- Errors -->
     <string name="error_invalid_email">Enter a valid email</string>
@@ -69,6 +108,10 @@
     <string name="error_crypto">Cryptographic error: %1$s</string>
     <string name="error_sync">Sync error: %1$s</string>
     <string name="error_entry_save">Failed to save entry: %1$s</string>
+    <string name="error_entry_save_cloud">Saved locally, but cloud upload failed: %1$s</string>
     <string name="error_entry_delete">Failed to delete entry: %1$s</string>
     <string name="error_service_empty">Specify service name</string>
+    <string name="error_not_signed_in">You are not signed in</string>
+    <string name="error_delete_cloud">Failed to delete cloud data: %1$s</string>
+    <string name="error_delete_account">Failed to delete account: %1$s</string>
 </resources>

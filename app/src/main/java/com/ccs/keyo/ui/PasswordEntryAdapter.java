@@ -3,6 +3,7 @@ package com.ccs.keyo.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import javax.crypto.SecretKey;
 /**
  * Адаптер списку записів. Показує назву сервісу та розшифрований логін.
  * Сам пароль у списку НЕ розшифровується — лише на екрані деталей.
+ * Long-press відкриває bottom sheet з діями (синхронізація з хмарою).
  */
 public class PasswordEntryAdapter
         extends RecyclerView.Adapter<PasswordEntryAdapter.EntryViewHolder> {
@@ -29,11 +31,18 @@ public class PasswordEntryAdapter
         void onEntryClick(PasswordEntry entry);
     }
 
+    public interface OnEntryLongClickListener {
+        void onEntryLongClick(PasswordEntry entry);
+    }
+
     private final List<PasswordEntry> entries = new ArrayList<>();
     private final OnEntryClickListener clickListener;
+    private final OnEntryLongClickListener longClickListener;
 
-    public PasswordEntryAdapter(OnEntryClickListener clickListener) {
+    public PasswordEntryAdapter(OnEntryClickListener clickListener,
+                                OnEntryLongClickListener longClickListener) {
         this.clickListener = clickListener;
+        this.longClickListener = longClickListener;
     }
 
     public void submit(List<PasswordEntry> newEntries) {
@@ -55,7 +64,14 @@ public class PasswordEntryAdapter
         PasswordEntry entry = entries.get(position);
         holder.serviceName.setText(entry.getServiceName());
         holder.username.setText(decryptPreview(entry.getEncryptedUsername(), holder));
+        if (holder.cloudBadge != null) {
+            holder.cloudBadge.setVisibility(entry.isCloudSynced() ? View.VISIBLE : View.GONE);
+        }
         holder.itemView.setOnClickListener(v -> clickListener.onEntryClick(entry));
+        holder.itemView.setOnLongClickListener(v -> {
+            longClickListener.onEntryLongClick(entry);
+            return true;
+        });
     }
 
     @Override
@@ -82,11 +98,13 @@ public class PasswordEntryAdapter
     static class EntryViewHolder extends RecyclerView.ViewHolder {
         final TextView serviceName;
         final TextView username;
+        final ImageView cloudBadge;
 
         EntryViewHolder(@NonNull View itemView) {
             super(itemView);
             serviceName = itemView.findViewById(R.id.item_service_name);
             username = itemView.findViewById(R.id.item_username);
+            cloudBadge = itemView.findViewById(R.id.item_cloud_badge);
         }
     }
 }

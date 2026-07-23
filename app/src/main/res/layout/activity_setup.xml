@@ -23,9 +23,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="12dp"
             android:text="@string/setup_subtitle"
             android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="?attr/colorSecondaryContainer"
+            android:padding="12dp"
+            android:text="@string/data_consent_notice"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSecondaryContainer" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/setup_email_layout"

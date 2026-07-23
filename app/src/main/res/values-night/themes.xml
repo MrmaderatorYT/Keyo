@@ -1,7 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Dark theme Material 3 -->
     <style name="Base.Theme.Keyo" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/keyo_primary_dark</item>
+        <item name="colorOnPrimary">@color/keyo_on_primary_dark</item>
+        <item name="colorPrimaryContainer">@color/keyo_primary_container_dark</item>
+        <item name="colorOnPrimaryContainer">@color/keyo_on_primary_container_dark</item>
+        <item name="colorSecondary">@color/keyo_secondary_dark</item>
+        <item name="colorSecondaryContainer">@color/keyo_secondary_container_dark</item>
+        <item name="colorOnSecondaryContainer">@color/keyo_on_secondary_container_dark</item>
+        <item name="android:colorBackground">@color/keyo_background_dark</item>
+        <item name="colorSurface">@color/keyo_surface_dark</item>
+        <item name="colorOnSurface">@color/keyo_on_surface_dark</item>
+        <item name="android:statusBarColor">@color/keyo_background_dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 </resources>

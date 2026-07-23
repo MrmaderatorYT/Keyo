@@ -22,6 +22,12 @@ A completely free Android app (API 26+, pure Java) for storing passwords with sy
 - **Verifier** — ciphertext of a known constant. Allows checking the master password locally (GCM tag matches → password is correct), without storing the password or its hash.
 - Forgot the master password → data recovery is **impossible**. This is the price of Zero-Knowledge.
 
+## Version 1.1 highlights
+
+- **Local-first storage**: passwords are saved encrypted on-device by default; Firestore upload is opt-in (per entry switch, long-press sync, or “sync all” in Settings).
+- **Settings**: system/light/dark theme (default: system), sync all to cloud, delete cloud data, delete account.
+- **Data transfer notice**: shown on login, setup, and settings — using the app means you agree to transfer of encrypted ciphertexts only.
+
 ## Code Structure
 
 | Layer | Files |
@@ -29,9 +35,9 @@ A completely free Android app (API 26+, pure Java) for storing passwords with sy
 | Crypto Core | `crypto/KeyoCryptographer.java` — Argon2id (Bouncy Castle, pure Java) + AES-256-GCM |
 | Session | `session/SessionManager.java` — key in RAM, 2 min auto-lock |
 | Models | `model/PasswordEntry.java`, `model/VaultProfile.java` |
-| Firebase | `firebase/FirebaseManager.java` — Auth + Firestore (ciphertexts only) |
-| UI | `ui/LoginActivity`, `ui/SetupActivity`, `ui/MainActivity`, `ui/DetailActivity`, `ui/PasswordEntryAdapter`, `ui/BaseSecureActivity` (FLAG_SECURE + auto-lock) |
-| Utils | `util/PasswordStrengthChecker.java`, `util/LocalVaultStore.java` |
+| Firebase | `firebase/FirebaseManager.java` — Auth + Firestore (ciphertexts only, optional) |
+| UI | `ui/LoginActivity`, `ui/SetupActivity`, `ui/MainActivity`, `ui/DetailActivity`, `ui/SettingsActivity`, `ui/PasswordEntryAdapter`, `ui/BaseSecureActivity` |
+| Utils | `util/PasswordStrengthChecker.java`, `util/LocalVaultStore.java`, `util/LocalEntryStore.java`, `util/AppSettings.java` |
 
 ## Firebase Setup (required before launch)
 

@@ -7,6 +7,8 @@ import com.ccs.keyo.model.PasswordEntry;
 import com.ccs.keyo.model.VaultProfile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -14,6 +16,7 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,7 +165,10 @@ public final class FirebaseManager {
     // CRUD записів (сюди потрапляють ЛИШЕ шифротексти)
     // =====================================================================
 
-    /** Створює новий запис (entry.id == null) або оновлює наявний. */
+    /**
+     * Зберігає запис у Firestore за клієнтським id (завжди document(id).set).
+     * id має бути заданий локально (UUID), щоб локальна й хмарна копії збігались.
+     */
     public void saveEntry(@NonNull PasswordEntry entry, @NonNull Callback<Void> callback) {
         if (!firebaseAvailable || firestore == null) {
             callback.onError(new IllegalStateException(
@@ -172,18 +178,15 @@ public final class FirebaseManager {
         String uid = requireUid(callback);
         if (uid == null) return;
         if (entry.getId() == null || entry.getId().isEmpty()) {
-            firestore.collection(COLLECTION_USERS).document(uid)
-                    .collection(COLLECTION_ENTRIES)
-                    .add(entry)
-                    .addOnSuccessListener(ref -> callback.onSuccess(null))
-                    .addOnFailureListener(callback::onError);
-        } else {
-            firestore.collection(COLLECTION_USERS).document(uid)
-                    .collection(COLLECTION_ENTRIES).document(entry.getId())
-                    .set(entry)
-                    .addOnSuccessListener(callback::onSuccess)
-                    .addOnFailureListener(callback::onError);
+            callback.onError(new IllegalArgumentException(
+                    "Entry id is required before cloud save"));
+            return;
         }
+        firestore.collection(COLLECTION_USERS).document(uid)
+                .collection(COLLECTION_ENTRIES).document(entry.getId())
+                .set(entry)
+                .addOnSuccessListener(callback::onSuccess)
+                .addOnFailureListener(callback::onError);
     }
 
     public void deleteEntry(@NonNull String entryId, @NonNull Callback<Void> callback) {
@@ -201,10 +204,33 @@ public final class FirebaseManager {
                 .addOnFailureListener(callback::onError);
     }
 
+    /** Одноразове завантаження всіх записів із Firestore (для merge у локальне сховище). */
+    public void fetchEntries(@NonNull Callback<List<PasswordEntry>> callback) {
+        if (!firebaseAvailable || firestore == null) {
+            callback.onError(new IllegalStateException(
+                    "Firebase не ініціалізовано. Див. README-KEYO.md"));
+            return;
+        }
+        String uid = requireUid(callback);
+        if (uid == null) return;
+        firestore.collection(COLLECTION_USERS).document(uid)
+                .collection(COLLECTION_ENTRIES)
+                .orderBy(FIELD_SERVICE_NAME, Query.Direction.ASCENDING)
+                .get()
+                .addOnSuccessListener((QuerySnapshot snapshots) -> {
+                    List<PasswordEntry> entries = new ArrayList<>();
+                    for (QueryDocumentSnapshot doc : snapshots) {
+                        entries.add(doc.toObject(PasswordEntry.class));
+                    }
+                    callback.onSuccess(entries);
+                })
+                .addOnFailureListener(callback::onError);
+    }
+
     /**
      * Realtime-підписка на список записів (миттєва синхронізація між
      * пристроями). Дані приходять зашифрованими; розшифрування — справа UI.
-     * Обов'язково викликати remove() на реєстрації в onDestroy().
+     * Обов'язково викликати remove() на реєстрації в onStop()/onDestroy().
      */
     @Nullable
     public ListenerRegistration listenEntries(@NonNull Callback<List<PasswordEntry>> callback) {
@@ -233,6 +259,88 @@ public final class FirebaseManager {
                 });
     }
 
+    /**
+     * Видаляє всі записи користувача з Firestore (профіль vault лишається).
+     * Акаунт Auth не чіпається.
+     */
+    public void deleteAllCloudEntries(@NonNull Callback<Void> callback) {
+        if (!firebaseAvailable || firestore == null) {
+            callback.onError(new IllegalStateException(
+                    "Firebase не ініціалізовано. Див. README-KEYO.md"));
+            return;
+        }
+        String uid = requireUid(callback);
+        if (uid == null) return;
+        firestore.collection(COLLECTION_USERS).document(uid)
+                .collection(COLLECTION_ENTRIES)
+                .get()
+                .addOnSuccessListener(snapshots -> {
+                    if (snapshots.isEmpty()) {
+                        callback.onSuccess(null);
+                        return;
+                    }
+                    WriteBatch batch = firestore.batch();
+                    int count = 0;
+                    // Firestore batch limit = 500
+                    List<Task<Void>> commits = new ArrayList<>();
+                    for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                        batch.delete(doc.getReference());
+                        count++;
+                        if (count >= 450) {
+                            commits.add(batch.commit());
+                            batch = firestore.batch();
+                            count = 0;
+                        }
+                    }
+                    if (count > 0) {
+                        commits.add(batch.commit());
+                    }
+                    if (commits.isEmpty()) {
+                        callback.onSuccess(null);
+                        return;
+                    }
+                    Tasks.whenAll(commits)
+                            .addOnSuccessListener(v -> callback.onSuccess(null))
+                            .addOnFailureListener(callback::onError);
+                })
+                .addOnFailureListener(callback::onError);
+    }
+
+    /**
+     * Повне видалення акаунта: усі entries + документ users/{uid} + Firebase Auth user.
+     * Може вимагати недавнього re-auth (Firebase Auth).
+     */
+    public void deleteAccount(@NonNull Callback<Void> callback) {
+        if (!firebaseAvailable || firestore == null || auth == null) {
+            callback.onError(new IllegalStateException(
+                    "Firebase не ініціалізовано. Див. README-KEYO.md"));
+            return;
+        }
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) {
+            callback.onError(new IllegalStateException(
+                    "Користувач не автентифікований у Firebase"));
+            return;
+        }
+        String uid = user.getUid();
+        deleteAllCloudEntries(new Callback<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+                firestore.collection(COLLECTION_USERS).document(uid)
+                        .delete()
+                        .addOnCompleteListener(profileTask ->
+                                user.delete()
+                                        .addOnSuccessListener(v -> callback.onSuccess(null))
+                                        .addOnFailureListener(callback::onError));
+            }
+
+            @Override
+            public void onError(@NonNull Exception e) {
+                callback.onError(e);
+            }
+        });
+    }
+
     /** uid поточного користувача або помилка в колбек, якщо не автентифіковано. */
     @Nullable
     private String requireUid(@NonNull Callback<?> callback) {
@@ -250,3 +358,4 @@ public final class FirebaseManager {
         return user.getUid();
     }
 }
+

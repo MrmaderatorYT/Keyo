@@ -1,12 +1,13 @@
 package com.ccs.keyo.model;
 
 import com.google.firebase.firestore.DocumentId;
+import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
 
 /**
- * Запис пароля так, як він зберігається у Firestore.
+ * Запис пароля: локальне сховище (за замовчуванням) та/або Firestore.
  *
  * Zero-Knowledge: поля encryptedUsername / encryptedPassword / encryptedNotes
  * містять Base64-пакети формату [version][IV][ciphertext+GCM-tag] —
@@ -16,6 +17,8 @@ import java.util.Date;
  *
  * Сервер бачить лише назву сервісу (для сортування списку) та шифротексти,
  * які без майстер-пароля розшифрувати неможливо.
+ *
+ * cloudSynced — лише локальний прапор (не пишеться у Firestore).
  */
 public class PasswordEntry {
 
@@ -31,6 +34,10 @@ public class PasswordEntry {
     private Date createdAt;
     @ServerTimestamp
     private Date updatedAt;
+
+    /** Чи є копія цього запису у Firestore. Не серіалізується на сервер. */
+    @Exclude
+    private boolean cloudSynced;
 
     /** Порожній конструктор обов'язковий для десеріалізації Firestore. */
     public PasswordEntry() {
@@ -99,4 +106,14 @@ public class PasswordEntry {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    @Exclude
+    public boolean isCloudSynced() {
+        return cloudSynced;
+    }
+
+    public void setCloudSynced(boolean cloudSynced) {
+        this.cloudSynced = cloudSynced;
+    }
 }
+

@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Light (біла) тема Material 3 -->
     <style name="Base.Theme.Keyo" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/keyo_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/keyo_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/keyo_on_primary_container</item>
+        <item name="colorSecondary">@color/keyo_secondary</item>
+        <item name="colorSecondaryContainer">@color/keyo_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/keyo_on_secondary_container</item>
+        <item name="android:colorBackground">@color/keyo_background_light</item>
+        <item name="colorSurface">@color/keyo_surface_light</item>
+        <item name="colorOnSurface">@color/keyo_on_surface_light</item>
+        <item name="android:statusBarColor">@color/keyo_background_light</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
     <style name="Theme.Keyo" parent="Base.Theme.Keyo" />

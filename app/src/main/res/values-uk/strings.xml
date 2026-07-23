@@ -19,6 +19,9 @@
     <string name="helper_master_password">Мінімум 10 символів, оцінка «Добрий» або вища</string>
     <string name="setup_zero_knowledge_note">⚠️ Майстер-пароль ніколи не залишає ваш пристрій. Якщо ви його забудете — відновити дані буде НЕМОЖЛИВО.</string>
 
+    <!-- Data consent (1.1) -->
+    <string name="data_consent_notice">Використовуючи додаток, ви автоматично погоджуєтесь на передачу даних (лише шифротексти). Майстер-пароль ніколи не залишає ваш пристрій.</string>
+
     <!-- Strength -->
     <string name="strength_very_weak">Надійність: дуже слабкий</string>
     <string name="strength_weak">Надійність: слабкий</string>
@@ -31,8 +34,13 @@
     <string name="action_add_entry">Додати запис</string>
     <string name="action_lock">Заблокувати</string>
     <string name="action_sign_out">Вийти з акаунта</string>
+    <string name="action_settings">Налаштування</string>
     <string name="locked_placeholder">•••••• (заблоковано)</string>
     <string name="decrypt_error_placeholder">Помилка розшифрування</string>
+    <string name="action_sync_cloud">Синхронізувати з хмарою</string>
+    <string name="action_already_synced">Уже синхронізовано з хмарою</string>
+    <string name="action_open_entry">Відкрити / редагувати</string>
+    <string name="entry_synced">Синхронізовано з хмарою</string>
 
     <!-- Detail -->
     <string name="title_new_entry">Новий запис</string>
@@ -48,11 +56,42 @@
     <string name="delete_confirm_title">Видалити запис?</string>
     <string name="delete_confirm_message">Цю дію неможливо скасувати.</string>
     <string name="entry_saved">Збережено (зашифровано)</string>
+    <string name="entry_saved_local">Збережено локально (зашифровано)</string>
+    <string name="entry_saved_cloud">Збережено локально та в хмару (зашифровано)</string>
     <string name="password_copied">Пароль скопійовано!</string>
     <string name="clipboard_warning">⚠️ Буфер очиститься через 30 с. Увага: клавіатури Samsung/Xiaomi можуть зберігати історію буфера (радимо очищати її або змінити клавіатуру)!</string>
+    <string name="switch_save_to_firestore">Надіслати у Firestore (хмара)</string>
+    <string name="helper_save_local_default">По дефолту пароль зберігається лише в надбезпечному локальному сховищі на цьому пристрої. Увімкніть перемикач, щоб також надіслати зашифровану копію в хмару.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Налаштування</string>
+    <string name="settings_theme_section">Тема</string>
+    <string name="settings_theme_hint">По дефолту — системна тема. Можна примусово білу (світлу) або темну.</string>
+    <string name="theme_system">Системна тема (за замовчуванням)</string>
+    <string name="theme_light">Світла (біла)</string>
+    <string name="theme_dark">Темна</string>
+    <string name="settings_sync_section">Синхронізація з хмарою</string>
+    <string name="settings_sync_hint">Надіслати всі локальні зашифровані паролі у Firestore. Лише шифротексти — майстер-пароль ніколи не залишає пристрій.</string>
+    <string name="action_sync_all_cloud">Синхронізувати всі паролі з хмарою</string>
+    <string name="sync_all_confirm_title">Синхронізувати все з хмарою?</string>
+    <string name="sync_all_confirm_message">Усі локальні зашифровані записи будуть надіслані у Firestore.</string>
+    <string name="sync_all_success">Усі паролі синхронізовано з хмарою</string>
+    <string name="sync_all_empty">Немає що синхронізувати — сховище порожнє</string>
+    <string name="sync_all_partial">Синхронізовано з %1$d помилками</string>
+    <string name="settings_danger_section">Небезпечна зона</string>
+    <string name="action_delete_cloud_data">Видалити всі дані з сервера</string>
+    <string name="settings_delete_cloud_hint">Видаляє хмарні копії. Локальні паролі на цьому пристрої залишаються. Акаунт не видаляється.</string>
+    <string name="delete_cloud_confirm_title">Видалити дані з сервера?</string>
+    <string name="delete_cloud_confirm_message">Усі записи паролів будуть видалені з Firestore. Ваш акаунт і локальні дані залишаться.</string>
+    <string name="delete_cloud_success">Дані з сервера видалено</string>
+    <string name="action_delete_account">Видалити акаунт</string>
+    <string name="settings_delete_account_hint">Назавжди видаляє акаунт, усі хмарні дані та локальне сховище на цьому пристрої.</string>
+    <string name="delete_account_confirm_title">Видалити акаунт?</string>
+    <string name="delete_account_confirm_message">Це назавжди видалить акаунт, усі хмарні дані та локальні паролі на цьому пристрої. Дію неможливо скасувати.</string>
+    <string name="delete_account_success">Акаунт видалено</string>
 
     <!-- Firebase -->
-    <string name="firebase_not_configured">⚠️ Firebase не налаштований. Див. README-KEYO.md для налаштування.</string>
+    <string name="firebase_not_configured">⚠️ Firebase не налаштований. Див. README.md для налаштування.</string>
 
     <!-- Errors -->
     <string name="error_invalid_email">Введіть коректний email</string>
@@ -69,6 +108,10 @@
     <string name="error_crypto">Криптографічна помилка: %1$s</string>
     <string name="error_sync">Помилка синхронізації: %1$s</string>
     <string name="error_entry_save">Не вдалося зберегти запис: %1$s</string>
+    <string name="error_entry_save_cloud">Збережено локально, але надсилання в хмару не вдалося: %1$s</string>
     <string name="error_entry_delete">Не вдалося видалити запис: %1$s</string>
     <string name="error_service_empty">Вкажіть назву сервісу</string>
+    <string name="error_not_signed_in">Ви не увійшли в акаунт</string>
+    <string name="error_delete_cloud">Не вдалося видалити дані з сервера: %1$s</string>
+    <string name="error_delete_account">Не вдалося видалити акаунт: %1$s</string>
 </resources>

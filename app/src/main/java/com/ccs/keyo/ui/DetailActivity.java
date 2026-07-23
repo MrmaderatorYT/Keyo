@@ -24,18 +24,23 @@ import com.ccs.keyo.crypto.KeyoCryptographer;
 import com.ccs.keyo.firebase.FirebaseManager;
 import com.ccs.keyo.model.PasswordEntry;
 import com.ccs.keyo.session.SessionManager;
+import com.ccs.keyo.util.LocalEntryStore;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.security.GeneralSecurityException;
 
 import javax.crypto.SecretKey;
 
 /**
- * Перегляд/редагування/створення запису. Розшифрування — лише тут і лише
- * сесійним ключем із пам'яті; при збереженні всі чутливі поля знову
- * шифруються перед відправкою у Firestore.
+ * Перегляд/редагування/створення запису.
+ *
+ * За замовчуванням запис зберігається ЛИШЕ локально (шифротекст у приватному
+ * сховищі). Рубіжник «Надіслати у Firestore» (OFF) дозволяє опційно
+ * продублювати шифротекст у хмару.
  */
 public class DetailActivity extends BaseSecureActivity {
 
@@ -44,6 +49,7 @@ public class DetailActivity extends BaseSecureActivity {
     public static final String EXTRA_ENC_USERNAME = "enc_username";
     public static final String EXTRA_ENC_PASSWORD = "enc_password";
     public static final String EXTRA_ENC_NOTES = "enc_notes";
+    public static final String EXTRA_CLOUD_SYNCED = "cloud_synced";
 
     private static final long CLIPBOARD_CLEAR_DELAY_MS = 30_000;
     private static final int GENERATED_PASSWORD_LENGTH = 20;
@@ -54,9 +60,11 @@ public class DetailActivity extends BaseSecureActivity {
     private TextInputEditText passwordInput;
     private TextInputEditText notesInput;
     private TextView clipboardWarningText;
+    private MaterialSwitch cloudSyncSwitch;
 
     @Nullable
     private String entryId;
+    private boolean initiallyCloudSynced;
 
     private final Handler clipboardHandler = new Handler(Looper.getMainLooper());
 
@@ -77,11 +85,15 @@ public class DetailActivity extends BaseSecureActivity {
         passwordInput = findViewById(R.id.detail_password);
         notesInput = findViewById(R.id.detail_notes);
         clipboardWarningText = findViewById(R.id.detail_clipboard_warning);
+        cloudSyncSwitch = findViewById(R.id.detail_cloud_sync_switch);
         MaterialButton generateButton = findViewById(R.id.detail_generate_button);
         MaterialButton copyButton = findViewById(R.id.detail_copy_button);
         MaterialButton saveButton = findViewById(R.id.detail_save_button);
 
         entryId = getIntent().getStringExtra(EXTRA_ENTRY_ID);
+        initiallyCloudSynced = getIntent().getBooleanExtra(EXTRA_CLOUD_SYNCED, false);
+        // По дефолту — локальне збереження; для вже синхронізованих — ON
+        cloudSyncSwitch.setChecked(initiallyCloudSynced);
         setTitle(entryId == null ? R.string.title_new_entry : R.string.title_edit_entry);
         if (entryId != null) {
             decryptIntoFields();
@@ -124,7 +136,7 @@ public class DetailActivity extends BaseSecureActivity {
     private void decryptIntoFields() {
         SecretKey key = SessionManager.getInstance().getMasterKey();
         if (key == null) {
-            finish(); // сесію заблоковано — BaseSecureActivity перенаправить
+            finish();
             return;
         }
         serviceInput.setText(getIntent().getStringExtra(EXTRA_SERVICE_NAME));
@@ -156,34 +168,81 @@ public class DetailActivity extends BaseSecureActivity {
             return;
         }
 
+        FirebaseUser user = FirebaseManager.getInstance().getCurrentUser();
+        if (user == null) {
+            Toast.makeText(this, R.string.error_not_signed_in, Toast.LENGTH_LONG).show();
+            return;
+        }
+
         SecretKey key = SessionManager.getInstance().getMasterKey();
         if (key == null) {
-            return; // автоблокування спрацює саме
+            return;
         }
         try {
-            // Zero-Knowledge: шифруємо ВСІ чутливі поля перед відправкою
+            // Zero-Knowledge: шифруємо ВСІ чутливі поля перед записом
             PasswordEntry entry = new PasswordEntry(
                     service,
                     KeyoCryptographer.encryptWithKey(textOf(usernameInput), key),
                     KeyoCryptographer.encryptWithKey(textOf(passwordInput), key),
                     KeyoCryptographer.encryptWithKey(textOf(notesInput), key));
             entry.setId(entryId);
+            boolean uploadToCloud = cloudSyncSwitch.isChecked();
+            entry.setCloudSynced(uploadToCloud);
 
-            FirebaseManager.getInstance().saveEntry(entry,
+            // 1) Завжди — локальне надбезпечне збереження
+            PasswordEntry saved = LocalEntryStore.save(this, user.getUid(), entry);
+            entryId = saved.getId();
+
+            if (!uploadToCloud) {
+                // Якщо раніше був у хмарі, а тепер вимкнено — прибираємо з Firestore
+                if (initiallyCloudSynced) {
+                    FirebaseManager.getInstance().deleteEntry(saved.getId(),
+                            new FirebaseManager.Callback<Void>() {
+                                @Override
+                                public void onSuccess(Void result) {
+                                    LocalEntryStore.markCloudSynced(
+                                            DetailActivity.this, user.getUid(),
+                                            saved.getId(), false);
+                                    toastSaved(false);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(@NonNull Exception e) {
+                                    toastSaved(false);
+                                    finish();
+                                }
+                            });
+                } else {
+                    toastSaved(false);
+                    finish();
+                }
+                return;
+            }
+
+            // 2) Опційно — дубль шифротексту у Firestore
+            FirebaseManager.getInstance().saveEntry(saved,
                     new FirebaseManager.Callback<Void>() {
                         @Override
                         public void onSuccess(Void result) {
-                            Toast.makeText(DetailActivity.this,
-                                    R.string.entry_saved, Toast.LENGTH_SHORT).show();
+                            LocalEntryStore.markCloudSynced(
+                                    DetailActivity.this, user.getUid(),
+                                    saved.getId(), true);
+                            toastSaved(true);
                             finish();
                         }
 
                         @Override
                         public void onError(@NonNull Exception e) {
+                            // Локально вже збережено
+                            LocalEntryStore.markCloudSynced(
+                                    DetailActivity.this, user.getUid(),
+                                    saved.getId(), false);
                             Toast.makeText(DetailActivity.this,
-                                    getString(R.string.error_entry_save,
+                                    getString(R.string.error_entry_save_cloud,
                                             e.getLocalizedMessage()),
                                     Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     });
         } catch (GeneralSecurityException e) {
@@ -192,28 +251,48 @@ public class DetailActivity extends BaseSecureActivity {
         }
     }
 
+    private void toastSaved(boolean cloud) {
+        Toast.makeText(this,
+                cloud ? R.string.entry_saved_cloud : R.string.entry_saved_local,
+                Toast.LENGTH_SHORT).show();
+    }
+
     private void confirmDelete() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.delete_confirm_title)
                 .setMessage(R.string.delete_confirm_message)
-                .setPositiveButton(R.string.delete, (dialog, which) ->
-                        FirebaseManager.getInstance().deleteEntry(entryId,
-                                new FirebaseManager.Callback<Void>() {
-                                    @Override
-                                    public void onSuccess(Void result) {
-                                        finish();
-                                    }
-
-                                    @Override
-                                    public void onError(@NonNull Exception e) {
-                                        Toast.makeText(DetailActivity.this,
-                                                getString(R.string.error_entry_delete,
-                                                        e.getLocalizedMessage()),
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                }))
+                .setPositiveButton(R.string.delete, (dialog, which) -> deleteEntry())
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
+    }
+
+    private void deleteEntry() {
+        FirebaseUser user = FirebaseManager.getInstance().getCurrentUser();
+        if (user == null || entryId == null) {
+            finish();
+            return;
+        }
+        LocalEntryStore.delete(this, user.getUid(), entryId);
+        if (initiallyCloudSynced) {
+            FirebaseManager.getInstance().deleteEntry(entryId,
+                    new FirebaseManager.Callback<Void>() {
+                        @Override
+                        public void onSuccess(Void result) {
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(@NonNull Exception e) {
+                            Toast.makeText(DetailActivity.this,
+                                    getString(R.string.error_entry_delete,
+                                            e.getLocalizedMessage()),
+                                    Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    });
+        } else {
+            finish();
+        }
     }
 
     /**

@@ -119,6 +119,22 @@
                     android:minLines="3" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Рубіжник: OFF = лише локально (по дефолту), ON = + Firestore -->
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/detail_cloud_sync_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:checked="false"
+                android:text="@string/switch_save_to_firestore" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/helper_save_local_default"
+                android:textAppearance="?attr/textAppearanceBodySmall" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/detail_save_button"
                 android:layout_width="match_parent"
